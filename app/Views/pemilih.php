@@ -23,23 +23,32 @@
                 <label class="d-inline-block mr-3 border border-3 border-dark p-3" id="1">
                     <input type="radio" class="form-check-input" name="pil" value="1">
                     <img src="<?=base_url()?>/1.jpeg" class="img-fluid rounded" width="200" height="200">
+                    <P>Nama: </P>
+                    <P>Nama: </P>
                 </label>
                 
                 <label class="d-inline-block mr-3 border border-3 border-dark p-3" id="2">
                     <input type="radio" name="pil" class="form-check-input" value="2">
                     <img src="<?=base_url()?>/2.jpeg" class="img-fluid rounded" width="200" height="200">
+                    <P>Nama: </P>
+                    <P>Nama: </P>
                 </label>
             </div>
           <input type="submit" value="Pilih" class="btn btn-primary form-control">
           <script>
+            const radios = document.querySelectorAll('input[type="radio"]');
             const pil1=document.getElementById('1')
             const pil2=document.getElementById('2')
+            //radios.style.display = 'none';
+            radios.forEach(radio => {
+              radio.style.display = 'none';
+            });
             pil1.addEventListener("click", function(){
-              pil1.style.backgroundColor = "#0D6EFD";
+              pil1.style.backgroundColor = "#0D6EFD"
               pil2.style.backgroundColor =""
             });
             pil2.addEventListener("click", function(){
-              pil2.style.backgroundColor = "#0D6EFD";
+              pil2.style.backgroundColor = "#0D6EFD"
               pil1.style.backgroundColor = "";
             });
             document.addEventListener("contextmenu", function(e){
