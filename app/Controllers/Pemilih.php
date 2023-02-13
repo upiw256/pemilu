@@ -20,12 +20,12 @@ class Pemilih extends BaseController
         $pemilih = new ModelPemilih();
         $data=$this->request->getPost('nis');
         $query=$pemilih->where('nis',$data)->first();
-        if($query['pilihan']!=null){
-            $this->session->setFlashdata('message', 'Anda Sudah Memilih');
-            return redirect()->to(base_url());
-        }
         if (!$query) {
             $this->session->setFlashdata('message', 'Data tidak ada');
+            return redirect()->to(base_url());
+        }
+        if($query['pilihan']!=null){
+            $this->session->setFlashdata('message', 'Anda Sudah Memilih');
             return redirect()->to(base_url());
         }
         if (session()->get('nis')) {
@@ -41,6 +41,7 @@ class Pemilih extends BaseController
         $query = $pemilih->set('pilihan',$data)->where('nis',session()->get('nis'))->update();
         if ($query) {
             $this->session->setFlashdata('berhasil', 'Data Sudah tersimpan');
+            session()->destroy('nis');
             return redirect()->to(base_url());
         }
     }

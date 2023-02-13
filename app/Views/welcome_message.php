@@ -25,18 +25,45 @@
       } ?>
       <form action="/pemilih/auth" method="post">
           <h5 class="card-title">Masukan NIS anda</h5>
-          <input type="number" name="nis" class="form-control mb-3" required>
+          <input type="number" name="nis" class="form-control mb-3" id="input" required>
+          <div id="keyboard">
+            <div class="key btn btn-secondary mb-2" id="key0">0</div>
+            <div class="key btn btn-secondary mb-2" id="key1">1</div>
+            <div class="key btn btn-secondary mb-2" id="key2">2</div>
+            <div class="key btn btn-secondary mb-2" id="key3">3</div>
+            <div class="key btn btn-secondary mb-2" id="key4">4</div>
+            <div class="key btn btn-secondary mb-2" id="key5">5</div>
+            <div class="key btn btn-secondary mb-2" id="key6">6</div>
+            <div class="key btn btn-secondary mb-2" id="key7">7</div>
+            <div class="key btn btn-secondary mb-2" id="key8">8</div>
+            <div class="key btn btn-secondary mb-2" id="key9">9</div>
+            <div class="key btn btn-secondary mb-2" id="keyClear">Bersihkan</div>
+          </div>
           <input type="submit" value="Masuk" class="btn btn-primary form-control">
       </form>
     </div>
   </div>
 </div>
 </div>
-<script>
-  document.addEventListener("contextmenu", function(e){
-  e.preventDefault();
-}, false);
-</script>
+      <script>
+        document.addEventListener("contextmenu", function(e){
+        e.preventDefault();
+      }, false);
+      const keyboard = document.querySelector("#keyboard");
+      const keys = keyboard.querySelectorAll(".key");
+      const input = document.querySelector("#input");
+
+      keys.forEach(key => {
+        key.addEventListener("click", () => {
+      if (key.id === "keyClear") {
+        input.value = "";
+      }else {
+        const keyValue = key.innerHTML;
+        input.value += keyValue;
+      }
+        });
+      });
+      </script>
     <script src="<?= base_url() ?>/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
