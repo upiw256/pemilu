@@ -13,9 +13,11 @@ class Admin extends BaseController
 
             'jumlahPemilih' => $pemilih->table('pemilih')->countAllResults(),
             'sudah' => $pemilih->table('pemilih')->where('pilihan IS NOT NULL')->countAllResults(),
+            'belum' => $pemilih->table('pemilih')->where('pilihan IS NULL')->countAllResults(),
             'pil1' => $pemilih->table('pemilih')->where('pilihan', 1)->countAllResults(),
             'pil2' => $pemilih->table('pemilih')->where('pilihan', 2)->countAllResults(),
         ];
+        
         return view('admin',$data);
     }
     public function datapemilih()
@@ -46,5 +48,42 @@ class Admin extends BaseController
     $pemilih->insert($data);
     $this->session->setFlashdata('berhasil', 'Data Sudah Tersimpan');
     return redirect()->to(base_url('/admin/datapemilih'));
+    }
+    public function hapus($id)
+    {
+        // dd($id);
+        $pemilih = new ModelPemilih();
+        $pemilih->where('id_pemilih', $id)->delete();
+        $this->session->setflashdata('berhasil', 'Data berhasil terhapus');
+        return redirect()->to(base_url('/admin/datapemilih'));
+    }
+    public function edit()
+    {
+        $pemilih = new ModelPemilih();
+        $id_pemilih = $this->request->getPost('id');
+        $nis = $this->request->getPost('nis');
+        $nama = $this->request->getPost('nama');
+        $kelas = $this->request->getPost('kelas');
+        $data=[
+            'nis'=>$nis,
+            'nama'=>$nama,
+            'kelas'=>$kelas,
+        ];
+        // dd($data);
+        $pemilih->set($data)->where('id_pemilih', $id_pemilih)->update();
+        $this->session->setflashdata('berhasil', 'Data berhasil berubah');
+        return redirect()->to(base_url('/admin/datapemilih'));
+    }
+    public function hasil()
+    {
+        $pemilih = new ModelPemilih();
+        $data=[
+
+            'jumlahPemilih' => $pemilih->table('pemilih')->countAllResults(),
+            'sudah' => $pemilih->table('pemilih')->where('pilihan IS NOT NULL')->countAllResults(),
+            'pil1' => $pemilih->table('pemilih')->where('pilihan', 1)->countAllResults(),
+            'pil2' => $pemilih->table('pemilih')->where('pilihan', 2)->countAllResults(),
+        ];
+        return view('hasil',$data);
     }
 }

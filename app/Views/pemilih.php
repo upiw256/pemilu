@@ -18,23 +18,33 @@
   <div class="card shadow-lg">
     <div class="card-body">
       <form action="/pemilih/pilih" method="post">
-          <h5 class="card-title">Pilih Calon</h5>
+          <h5 class="card-title">Pilih Calon (klik salah satu)</h5>
+          <h5>
+            Data Pemilih: <br>
+            NIS: <?= $nis ?> <br>
+            Nama: <?= $nama ?> <br>
+            Kelas: <?= $kelas ?>
+          </h5>
           <div class="form-group mb-3">
-                <label class="d-inline-block mr-3 border border-3 border-dark p-3" id="1">
+                <label class="d-inline-block mr-3 p-3 border border-2 border-primary" id="1">
+                  <div class="d-flex justify-content-center flex-column flex-wrap">
                     <input type="radio" class="form-check-input" name="pil" value="1">
                     <img src="<?=base_url()?>/1.jpeg" class="img-fluid rounded" width="200" height="200">
-                    <P>Nama: </P>
-                    <P>Nama: </P>
+                    <P>Nama: Azhar Fatwa Nugraha (XI IPA 1) </P>
+                    <P>Nama: Rameyshanda Pudjianti Putri (XI IPA 3) </P>
+                  </div>
                 </label>
                 
-                <label class="d-inline-block mr-3 border border-3 border-dark p-3" id="2">
+                <label class="d-inline-block mr-3 p-3 border border-2 border-primary" id="2">
+                  <div class="d-flex justify-content-center flex-column flex-wrap">
                     <input type="radio" name="pil" class="form-check-input" value="2">
                     <img src="<?=base_url()?>/2.jpeg" class="img-fluid rounded" width="200" height="200">
-                    <P>Nama: </P>
-                    <P>Nama: </P>
+                    <P>Nama: Aditya Pasha Priwardhana (XI IPA 3)</P>
+                    <P>Nama: Sherla Devita (XI IPA 6)</P>
+                  </div>
                 </label>
             </div>
-          <input type="submit" value="Pilih" class="btn btn-primary form-control">
+          <input type="submit" value="Pilih" id="submitBtn" class="btn btn-primary form-control" disabled>
           <script>
             const radios = document.querySelectorAll('input[type="radio"]');
             const pil1=document.getElementById('1')
@@ -46,10 +56,16 @@
             pil1.addEventListener("click", function(){
               pil1.style.backgroundColor = "#0D6EFD"
               pil2.style.backgroundColor =""
+              pil1.style.color="#F5EFE0"
+              pil2.style.color="#212529"
+              document.getElementById("submitBtn").disabled = false;
             });
             pil2.addEventListener("click", function(){
               pil2.style.backgroundColor = "#0D6EFD"
               pil1.style.backgroundColor = "";
+              pil2.style.color="#F5EFE0"
+              pil1.style.color="#212529"
+              document.getElementById("submitBtn").disabled = false;
             });
             document.addEventListener("contextmenu", function(e){
               e.preventDefault();

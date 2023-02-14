@@ -115,7 +115,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Hasil</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="#">
+          <a class="nav-link  " href="/admin/hasil">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -217,7 +217,7 @@
               <div class="card p-3">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah</button>
                 <?php if (session()->getFlashdata('berhasil')) {
-                    echo '<div class="alert alert-success">' . session()->getFlashdata('berhasil') . '</div>';
+                    echo '<div id="flash" class="alert alert-success">' . session()->getFlashdata('berhasil') . '</div>';
                 } ?>
                 <table id="example" class="table table-striped" style="width:100%">
         <thead>
@@ -235,6 +235,7 @@
               $no = 1;
               foreach ($pemilih as $pemilih)
               {
+                $id_pemilih = $pemilih->id_pemilih;
                 if ($pemilih->pilihan > 0) {
                   $sudah = "Sudah";
                   $text = "text-success";
@@ -249,89 +250,10 @@
                 <td><?= $pemilih->nama ?></td>
                 <td><?= $pemilih->kelas ?></td>
                 <td class="<?= $text ?>"><?= $sudah ?></td>
-                <td><a href="#" data-bs-toggle="modal" data-bs-target="#edit-<?= $pemilih->nis ?>">Edit</a><a href="/admin/hapus/<?= $pemilih->id_pemilih ?>"> | Hapus</a></td>
-                  <div class="modal fade" id="edit-<?= $pemilih->nis ?>" tabindex="-1" role="dialog" aria-labelledby="edit<?= $pemilih->nis ?>ModalLabel" aria-hidden="true" data-backdrop="static">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form action="/admin/edit" method="post" class="form-control">
-                            <label for="nis" class="form-label">Nis</label>
-                            <input type="text" name="nis" id="nis" class="form-control" value="<?= $pemilih->nis ?>">
-                            <label for="nama" class="form-label">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" value="<?= $pemilih->nama ?>">
-                            <label for="kelas" class="form-label">Kelas</label>
-                            <select class="form-control" name="kelas" id="kelas">
-                                  <option value="<?= $pemilih->kelas ?>" selected><?= $pemilih->kelas ?></option>
-                                <optgroup label="X IPA">
-                                  <option value="X IPA 1">X IPA 1</option>
-                                  <option value="X IPA 2">X IPA 2</option>
-                                  <option value="X IPA 3">X IPA 3</option>
-                                  <option value="X IPA 4">X IPA 4</option>
-                                  <option value="X IPA 5">X IPA 5</option>
-                                  <option value="X IPA 6">X IPA 6</option>
-                                  <option value="X IPA 7">X IPA 7</option>
-                                </optgroup>
-                                <optgroup label="X IPS">
-                                  <option value="X IPS 1">X IPS 1</option>
-                                  <option value="X IPS 2">X IPS 2</option>
-                                  <option value="X IPS 3">X IPS 3</option>
-                                  <option value="X IPS 4">X IPS 4</option>
-                                  <option value="X IPS 5">X IPS 5</option>
-                                  <option value="X IPS 6">X IPS 6</option>
-                                  <option value="X IPS 7">X IPS 7</option>
-                                </optgroup>
-                                <optgroup label="XI IPA">
-                                  <option value="XI IPA 1">XI IPA 1</option>
-                                  <option value="XI IPA 2">XI IPA 2</option>
-                                  <option value="XI IPA 3">XI IPA 3</option>
-                                  <option value="XI IPA 4">XI IPA 4</option>
-                                  <option value="XI IPA 5">XI IPA 5</option>
-                                  <option value="XI IPA 6">XI IPA 6</option>
-                                  <option value="XI IPA 7">XI IPA 7</option>
-                                </optgroup>
-                                <optgroup label="XI IPS">
-                                  <option value="XI IPS 1">XI IPS 1</option>
-                                  <option value="XI IPS 2">XI IPS 2</option>
-                                  <option value="XI IPS 3">XI IPS 3</option>
-                                  <option value="XI IPS 4">XI IPS 4</option>
-                                  <option value="XI IPS 5">XI IPS 5</option>
-                                  <option value="XI IPS 6">XI IPS 6</option>
-                                  <option value="XI IPS 7">XI IPS 7</option>
-                                </optgroup>
-                                <optgroup label="XII IPA">
-                                  <option value="XII IPA 1">XII IPA 1</option>
-                                  <option value="XII IPA 2">XII IPA 2</option>
-                                  <option value="XII IPA 3">XII IPA 3</option>
-                                  <option value="XII IPA 4">XII IPA 4</option>
-                                  <option value="XII IPA 5">XII IPA 5</option>
-                                  <option value="XII IPA 6">XII IPA 6</option>
-                                  <option value="XII IPA 7">XII IPA 7</option>
-                                </optgroup>
-                                <optgroup label="XII IPS">
-                                  <option value="XII IPS 1">XII IPS 1</option>
-                                  <option value="XII IPS 2">XII IPS 2</option>
-                                  <option value="XII IPS 3">XII IPS 3</option>
-                                  <option value="XII IPS 4">XII IPS 4</option>
-                                  <option value="XII IPS 5">XII IPS 5</option>
-                                  <option value="XII IPS 6">XII IPS 6</option>
-                                  <option value="XII IPS 7">XII IPS 7</option>
-                                </optgroup>
-                            </select>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <input type="submit" class="btn btn-primary" value="Simpan">
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <td><button class="btn btn-warning mr-3" data-bs-toggle="modal" data-bs-target="#edit" onClick="modal(<?= $id_pemilih ?>,<?= $pemilih->nis ?>,'<?= $pemilih->nama ?>','<?= $pemilih->kelas ?>');">Edit</button><button class="btn btn-danger" id="data-<?= $id_pemilih ?>" onClick="coba('<?= $id_pemilih ?>')">Hapus</button></td>                  
               </tr>
-              <?php } ?>
+              <?php }?>
+
         </tbody>
     </table>
               </div>
@@ -357,7 +279,7 @@
       </footer>
     </div>
   </main>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -436,6 +358,87 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" >                  
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/admin/edit" method="post" class="form-control">
+          <label for="nis" class="form-label">Nis</label>
+          <input type="text" name="nis" id="nis-edit" class="form-control" value="">
+          <input type="text" name="id" id="id-edit" class="form-control" value="" hidden>
+          <label for="nama" class="form-label">Nama</label>
+          <input type="text" name="nama" id="nama-edit" class="form-control" value="">
+          <label for="kelas" class="form-label">Kelas</label>
+          <select class="form-control" name="kelas" id="kelas-edit">
+                <!-- <option  value="" selected></option> -->
+              <optgroup label="X IPA">
+                <option value="X IPA 1">X IPA 1</option>
+                <option value="X IPA 2">X IPA 2</option>
+                <option value="X IPA 3">X IPA 3</option>
+                <option value="X IPA 4">X IPA 4</option>
+                <option value="X IPA 5">X IPA 5</option>
+                <option value="X IPA 6">X IPA 6</option>
+                <option value="X IPA 7">X IPA 7</option>
+              </optgroup>
+              <optgroup label="X IPS">
+                <option value="X IPS 1">X IPS 1</option>
+                <option value="X IPS 2">X IPS 2</option>
+                <option value="X IPS 3">X IPS 3</option>
+                <option value="X IPS 4">X IPS 4</option>
+                <option value="X IPS 5">X IPS 5</option>
+                <option value="X IPS 6">X IPS 6</option>
+                <option value="X IPS 7">X IPS 7</option>
+              </optgroup>
+              <optgroup label="XI IPA">
+                <option value="XI IPA 1">XI IPA 1</option>
+                <option value="XI IPA 2">XI IPA 2</option>
+                <option value="XI IPA 3">XI IPA 3</option>
+                <option value="XI IPA 4">XI IPA 4</option>
+                <option value="XI IPA 5">XI IPA 5</option>
+                <option value="XI IPA 6">XI IPA 6</option>
+                <option value="XI IPA 7">XI IPA 7</option>
+              </optgroup>
+              <optgroup label="XI IPS">
+                <option value="XI IPS 1">XI IPS 1</option>
+                <option value="XI IPS 2">XI IPS 2</option>
+                <option value="XI IPS 3">XI IPS 3</option>
+                <option value="XI IPS 4">XI IPS 4</option>
+                <option value="XI IPS 5">XI IPS 5</option>
+                <option value="XI IPS 6">XI IPS 6</option>
+                <option value="XI IPS 7">XI IPS 7</option>
+              </optgroup>
+              <optgroup label="XII IPA">
+                <option value="XII IPA 1">XII IPA 1</option>
+                <option value="XII IPA 2">XII IPA 2</option>
+                <option value="XII IPA 3">XII IPA 3</option>
+                <option value="XII IPA 4">XII IPA 4</option>
+                <option value="XII IPA 5">XII IPA 5</option>
+                <option value="XII IPA 6">XII IPA 6</option>
+                <option value="XII IPA 7">XII IPA 7</option>
+              </optgroup>
+              <optgroup label="XII IPS">
+                <option value="XII IPS 1">XII IPS 1</option>
+                <option value="XII IPS 2">XII IPS 2</option>
+                <option value="XII IPS 3">XII IPS 3</option>
+                <option value="XII IPS 4">XII IPS 4</option>
+                <option value="XII IPS 5">XII IPS 5</option>
+                <option value="XII IPS 6">XII IPS 6</option>
+                <option value="XII IPS 7">XII IPS 7</option>
+              </optgroup>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          <input type="submit" class="btn btn-primary" value="Simpan">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--   Core JS Files   -->
 <script src="<?= base_url() ?>/js/core/popper.min.js"></script>
@@ -444,11 +447,46 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
-
   <script>
     $(document).ready(function () {
       $('#example').DataTable();
     });
+    function coba(id_pilih) {
+      const id = id_pilih
+      Swal.fire({
+            title: 'Hapus data?',
+            text: "Apakah yankin akan menghapus data ini ??",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yah, Hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+              window.location = "<?= base_url('admin/hapus/'); ?>/" + id;
+              console.log(id)
+              swalWithBootstrapButtons.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+        });
+    }
+    function modal(id_pemilih,nis,nama,kelas) {
+      var Pnis = document.getElementById("nis-edit")
+      var Pnama = document.getElementById("nama-edit")
+      var Pkelas = document.getElementById("kelas-edit")
+      var Pid = document.getElementById("id-edit")
+      Pnis.value = nis
+      Pnama.value = nama
+      Pkelas.value = kelas
+      Pid.value=id_pemilih
+    }
+    setTimeout(function() {
+        document.getElementById("flash").style.display = "none";
+      }, 2000);
+  </script>
 
 </body>
 

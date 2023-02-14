@@ -41,7 +41,6 @@ class Pemilih extends BaseController
         $query = $pemilih->set('pilihan',$data)->where('nis',session()->get('nis'))->update();
         if ($query) {
             $this->session->setFlashdata('berhasil', 'Data Sudah tersimpan');
-            session()->destroy('nis');
             return redirect()->to(base_url());
         }
     }

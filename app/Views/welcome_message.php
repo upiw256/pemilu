@@ -18,11 +18,14 @@
   <div class="card shadow-lg" style="width: 18rem;">
     <div class="card-body">
         <?php if (session()->getFlashdata('message')) {
-          echo '<div class="alert alert-danger">' . session()->getFlashdata('message') . '</div>';
+          echo '<div class="alert alert-danger" id="flashdata">' . session()->getFlashdata('message') . '</div>';
       } ?>
        <?php if (session()->getFlashdata('berhasil')) {
-          echo '<div class="alert alert-success">' . session()->getFlashdata('berhasil') . '</div>';
+          echo '<div class="alert alert-success" id="flashdata">' . session()->getFlashdata('berhasil') . '</div>';
       } ?>
+      <?php 
+      session()->destroy('nis');
+      ?>
       <form action="/pemilih/auth" method="post">
           <h5 class="card-title">Masukan NIS anda</h5>
           <input type="number" name="nis" class="form-control mb-3" id="input" required>
@@ -63,6 +66,9 @@
       }
         });
       });
+      setTimeout(function() {
+        document.getElementById("flashdata").style.display = "none";
+      }, 2000);
       </script>
     <script src="<?= base_url() ?>/js/bootstrap.bundle.min.js"></script>
 </body>
