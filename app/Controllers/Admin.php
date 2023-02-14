@@ -28,4 +28,23 @@ class Admin extends BaseController
         ];
         return view('datapemilih',$data);
     }
+    public function tambah()
+    {
+        $nama = $this->request->getPost('nama');
+        $nis = $this->request->getPost('nis');
+        $kelas = $this->request->getPost('kelas');
+        $data = 
+            [
+                'id' => null,
+                'nis'=> $nis,
+                'nama'=> $nama,
+                'kelas'=> $kelas,
+                'pilihan'=>null
+            ];
+            // dd($data);
+    $pemilih = new ModelPemilih();
+    $pemilih->insert($data);
+    $this->session->setFlashdata('berhasil', 'Data Sudah Tersimpan');
+    return redirect()->to(base_url('/admin/datapemilih'));
+    }
 }
